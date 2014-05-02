@@ -351,6 +351,22 @@ declare module Rx {
 		fromArray<T>(array: T[], scheduler?: IScheduler): Observable<T>;
 		fromArray<T>(array: { length: number;[index: number]: T; }, scheduler?: IScheduler): Observable<T>;
 
+
+  	  /**
+   	   * Creates an observable sequence by adding an event listener to the matching DOMElement or each item in the NodeList.
+   	   *
+   	   * @example
+   	   *   var source = Rx.Observable.fromEvent(element, 'mouseup');
+   	   * 
+   	   * @param element The DOMElement or NodeList to attach a listener.
+   	   * @param eventName The event name to attach the observable sequence.
+   	   * @param [selector] A selector which takes the arguments from the event handler to produce a single item to yield on next.     
+   	   * @returns An observable sequence of events from the specified element and the specified event.
+   	   */
+		fromEvent<T>(element: NodeList, eventName: string, selector?: (arguments: any[]) => T): Observable<T>;
+		fromEvent<T>(element: Node, eventName: string, selector?: (arguments: any[]) => T): Observable<T>;
+        fromEventPattern<T>(addHandler: (handler: Function) => void, removeHandler: (handler: Function) => void, selector?: (arguments: any[])=>T): Observable<T>;
+
 		/**
 		*  Converts an iterable into an Observable sequence
 		*  
